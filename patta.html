@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="patta.css">
+	<script type="text/javascript" src="./paperjs-v0.12.4/dist/paper-full.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.3/howler.min.js"></script>
+	<script type="text/javascript" src="sounds.js"></script>
+	<script type="text/paperscript" canvas="myCanvas">
+	var newCircle = new Path.Circle(new Point(100, 70), 50);
+	newCircle.strokeColor = 'black';
+	var circles = [];
+
+	function onKeyDown(event) {
+	// When a key is pressed, set the content of the text item:
+		console.log('The ' + event.key + ' key was pressed!');
+		keyData[event.key].sound.play();
+		newCircle = new Path.Circle(new Point(Math.random()*view.size.width, Math.random()*view.size.height), 200);
+		newCircle.fillColor = keyData[event.key].colour;
+		circles.unshift(newCircle);
+
+
+	}
+
+	function onFrame(event) {
+		// Each frame, change the fill color of the path slightly by
+		// adding 1 to its hue:
+		for (var i=0; i< circles.length; i++) {
+			circles[i].scale(0.8);
+		}
+		
+	}
+
+</script>
+</head>
+
+<body>
+	<canvas id="myCanvas" resize></canvas>
+</body>
